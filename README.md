@@ -1,14 +1,14 @@
 # Sleep Tracker — GPT-5.5 → Kotlin Multiplatform (KMP) Migration
 
-> **Thesis artifact 1 of 7.** This repository is one implementation from a McMaster University M.Sc. thesis studying whether AI coding agents can migrate a mobile health app across frameworks without degrading usability. See [Thesis citation](#thesis-citation) and [Related repositories](#related-repositories) below.
+> This is repo 1 of 7 from my M.Sc. thesis at McMaster University, *"Who Moved My Button?": A Usability Evaluation of LLM-Assisted Cross-Platform Migration*. I had two AI coding agents (Claude Sonnet 4.6 and GPT-5.5) each migrate a real mobile health app to three different frameworks, then evaluated all 7 resulting apps for usability. This repo is GPT-5.5's rewrite in Kotlin Multiplatform. The other six are linked below.
 
-Compose Multiplatform (Android + iOS) rewrite of the original React Native "Sleep Tracker" privacy-transparency app, produced by **GPT-5.5** under a shared 15-rule migration prompt. It talks to the same Node.js/Express backend as the original app (see [thesis-privacy-baseline](https://github.com/MelvinMo/thesis-privacy-baseline)).
+Compose Multiplatform (Android) rewrite of the original React Native "Sleep Tracker" privacy-transparency app, produced by **GPT-5.5** under a shared 15-rule migration prompt I wrote. It talks to the same Node.js/Express backend as the original app (see [thesis-privacy-baseline](https://github.com/MelvinMo/thesis-privacy-baseline)).
 
 ---
 
-## Usability findings (from the thesis)
+## Usability findings (from my thesis)
 
-This migration was evaluated with Nielsen's ten usability heuristics across six standardized tasks by a single assessor (severity 0–4, lower is better). Full detail is in **Chapter 5** of the thesis (App 1).
+This migration was evaluated with Nielsen's ten usability heuristics across six standardized tasks by a single assessor (severity 0–4, lower is better). Full detail is in **Chapter 5** of my thesis (App 1).
 
 | Metric | Value |
 |---|---|
@@ -43,7 +43,6 @@ A more detailed file-by-file and route-by-route mapping produced during migratio
 | Android Studio | Hedgehog (2023.1) or later | https://developer.android.com/studio |
 | JDK | Android Studio's bundled JBR (OpenJDK 21) — do not use a system JDK | — |
 | Android SDK | API 35 (compile), API 26+ (run) | SDK Manager inside Android Studio |
-| Xcode 15+ | Mac only, for iOS target | Mac App Store |
 
 ---
 
@@ -130,21 +129,14 @@ adb logcat -d -t 300 | grep -E "sleeptracker|FATAL EXCEPTION|AndroidRuntime"
 
 ---
 
-## 5. Run on iOS (Mac only)
-
-In Android Studio, select an iOS simulator target from the run configurations dropdown and click **Run**. The Kotlin/Native compiler builds an `.xcframework` and launches the simulator.
-
----
-
 ## Project structure
 
 ```
 ├── composeApp/src/
 │   ├── commonMain/kotlin/com/mcscert/sleeptracker/
 │   │   └── App.kt              # Shared UI, ViewModels, navigation, repositories (single file)
-│   ├── androidMain/kotlin/com/mcscert/sleeptracker/
-│   │   └── MainActivity.kt     # Android entry point
-│   └── iosMain/                # iOS platform stubs (IosActuals.kt)
+│   └── androidMain/kotlin/com/mcscert/sleeptracker/
+│       └── MainActivity.kt     # Android entry point
 ├── composeApp/build.gradle.kts # Backend URL Gradle properties (see Section 2)
 ├── KMP_MIGRATION_AUDIT.md      # Route/component mapping notes from the migration
 ├── .env.example                # Backend URL reference values (see Section 2)
@@ -153,12 +145,12 @@ In Android Studio, select an iOS simulator target from the run configurations dr
 
 ---
 
-## Known limitations (from the thesis)
+## Known limitations (from my thesis)
 
 - Application logic is concentrated in a single 2,516-line file rather than split across conventional KMP source-set packages.
 - The privacy tooltip has no scroll support and clips content that exceeds its fixed height.
 - The privacy tooltip omits tappable links to the privacy policy, PIPEDA regulation, and opt-out preferences (present in the GPT-5.5 Flutter migration).
-- See Chapter 5 of the thesis for the full task-by-task and heuristic-by-heuristic severity breakdown, including the two other GPT-5.5 migrations (Flutter, MAUI).
+- See Chapter 5 of my thesis for the full task-by-task and heuristic-by-heuristic severity breakdown, including the two other GPT-5.5 migrations (Flutter, MAUI).
 
 ---
 
@@ -168,9 +160,9 @@ This repository contains **no real credentials**. `.env.example` holds placehold
 
 ---
 
-## Thesis citation
+## Citing my thesis
 
-If you reference this artifact, please cite:
+If you're referencing this repo, here's the full citation:
 
 > Mokhtari, M. (2026). *"Who Moved My Button?": A Usability Evaluation of LLM-Assisted Cross-Platform Migration* [Master's thesis, McMaster University]. Department of Computing and Software. Supervisor: Richard F. Paige.
 
@@ -178,4 +170,4 @@ If you reference this artifact, please cite:
 
 ## License
 
-All rights reserved. This repository is published for academic review and reproducibility alongside the thesis above. No license is granted for reuse, modification, or redistribution without permission from the author.
+All rights reserved — this is my thesis work. I've published it publicly so it's easy to review and reproduce, but please reach out to me before reusing or redistributing any of it.
